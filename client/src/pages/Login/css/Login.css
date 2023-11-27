@@ -33,6 +33,7 @@ label {
 
 .input-group {
   position: relative;
+  padding-right: 20px;
 }
 
 .input-group input {
