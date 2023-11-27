@@ -1,0 +1,26 @@
+/* ErrorPage.css */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8d7da; /* Light red background color */
+  }
+  
+  .error-content {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #721c24; /* Dark red text color */
+  }
+  
+  p {
+    color: #721c24; /* Dark red text color */
+    margin-top: 10px;
+  }
+  
