@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import './css/Sign.css';
 import axios from '../../service/axios/axio.service';
+import Notification from '../../components/notification/Notification';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
+  const navigateTo = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -24,7 +28,7 @@ const Registration = () => {
       reader.onloadend = () => {
         setFormData({
           ...formData,
-          profilePicture: reader.result, // Set base64 representation of the image
+          profilePicture: reader.result,
         });
       };
 
@@ -36,7 +40,6 @@ const Registration = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
-  console.log('formData => ', formData)
 
   const validateForm = () => {
     const newErrors = {};
@@ -79,14 +82,20 @@ const Registration = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Implement your registration logic here
-      console.log('Form is valid. Submitting...', formData);
-      let result  = axios.post('/sign-in', formData)
-      console.log('result => ',result);
+      let result = await axios.post('/sign-in', formData)
+
+      if(result.status === 201){
+        Notification(toast, 'success', 'POSITION', 'BOTTOM_RIGHT', "Registration done successfully");
+        Notification(toast, 'info', 'POSITION', 'BOTTOM_RIGHT', "Kindly please login again");
+        navigateTo(`/login`);
+      }
+      else{
+        Notification(toast, 'error', 'POSITION', 'BOTTOM_RIGHT', "Something went wrong! Invalid request.");
+      }
     } else {
       console.log('Form is invalid. Please check the fields.');
     }

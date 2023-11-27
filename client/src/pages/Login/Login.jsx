@@ -5,6 +5,8 @@ import { setAuth } from '../../store/slices/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../service/user.service';
+import { toast } from 'react-toastify';
+import Notification from '../../components/notification/Notification';
 
 const Login = () => {
   const navigateTo = useNavigate();
@@ -44,19 +46,15 @@ const Login = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Implement your login logic here
-      console.log('Form is valid. Submitting...', formData);
-      console.log('before dispatching => ', auth)
-      dispatch(setAuth(true));
-      console.log('after dispatching => ', auth);
       let result = await userService.loginService('/login', formData);
 
       if(result.status === 200){
+        dispatch(setAuth(true));
+        Notification(toast, 'success', 'POSITION', 'BOTTOM_RIGHT', "Logged in successfully!");
         navigateTo(`/start?userid=${result.data.data}`)
       }
-      console.log('result => ',result)
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      Notification(toast, 'error', 'POSITION', 'BOTTOM_RIGHT', "Form is invalid. Please check the fields.");
     }
   };
 
