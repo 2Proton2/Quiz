@@ -1,21 +1,20 @@
 .dashboard-container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Adjust the height based on your design */
+    height: 100vh;
+    width: 50vw;
   }
   
   .navbar {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #f0f0f0;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: lightgray;
   }
   
   .profile-section {
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
   
   .profile-picture {
@@ -24,15 +23,64 @@
     border-radius: 50%;
     margin-right: 10px;
   }
-  
-  .user-name {
-    font-weight: bold;
-  }
-  
-  .main-content {
+
+.main-content.card {
+    width: 100%;
+    margin: 50px auto;
     padding: 20px;
-    flex: 1;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
   }
   
-  /* Add additional styling as needed */
+  .main-content.card h2 {
+    color: #2c3e50;
+  }
+  
+  .question {
+    margin-bottom: 20px;
+  }
+  
+  .question p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .options button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .options button:hover {
+    background-color: #27ae60;
+  }
+  
+  .result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3498db;
+  }
   

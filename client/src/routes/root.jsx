@@ -43,6 +43,7 @@ import Sign from "../pages/Sign/Sign";
 import Start from "../pages/Start/Start";
 import Error from "../pages/Error/Error";
 import Game from "../pages/Game/Game";
+import Result from "../pages/Result/Result";
 
 const AppRouter = () => {
   return (
@@ -52,6 +53,7 @@ const AppRouter = () => {
         <Route path="/signin" element={<Sign />} />
         <Route path="/start" element={<Start />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/result" element={<Result />} />
         <Route path="*" element={<Error />} />
       </Routes>
   );
