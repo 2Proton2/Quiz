@@ -9,20 +9,13 @@ const AppController =  {
 
   signin: async (req, res, next) => {
     try {
-      console.log(req)
-      const userInstance = new userSchema(req.body);
-      
-      /**
-       * save into the db
-       */
-      let result = await userInstance.save();
-      res.status(201).json({message:"Registeration done successfully"})
-      
-      console.log('redirected')
+      let result = await AppService.createUser(req.body);
+      res.status(201).json({message:"Registeration done successfully"});
       
     } catch (error) {
       res.status(505).send({
         message: `error for sigin api`,
+        error: error
       })
     }
   },
@@ -30,11 +23,11 @@ const AppController =  {
   login: async (req, res, next) => {
     try {
       //first find whether the email id is present or not
-      let emailExistance = await userSchema.findOne({email: req.body.email})
+      let emailExistance = await AppService.findOneField('email', req.body.email);
 
       //compare the userEntered password with hashed password present in the database
-      let enteredPassword = await bcrypt.compare(req.body.password, emailExistance.password)
-      console.log('eP => ',enteredPassword)
+      // let enteredPassword = await bcrypt.compare(req.body.password, emailExistance.password)
+      let enteredPassword = await AppService.comparePassword(req.body.password, emailExistance.password)
       if(emailExistance && enteredPassword){
         res.status(200).json({
           message:"logged in successfully",
@@ -54,9 +47,7 @@ const AppController =  {
   getUserDetails: async (req, res, next) => {
     try {
       const id = req.params.id;
-      console.log('Yeah backedn is called', id)
-      let result = await userSchema.findOne({_id: id})
-      console.log('result => ',result)
+      let result = await AppService.findOneField('_id', id);
 
       if(result){
         res.status(200).json({

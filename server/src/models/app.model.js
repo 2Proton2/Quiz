@@ -38,16 +38,7 @@ let appSchema = new Schema(
     },
     phoneNumber: {
       type: String,
-      required: ['true', 'User phone number required'],
-      validate: {
-        validator: (value) => {
-          const phoneValidation = /^[6-9]\d{9}$/
-          if(!phoneValidation.test(value)){
-            throw new Error(`Enter a valid phone nuber with country code`)
-          }
-        }, 
-        message: 'Enter a valid phone number'
-      }
+      required: true
     },
     password: {
       type: String,
